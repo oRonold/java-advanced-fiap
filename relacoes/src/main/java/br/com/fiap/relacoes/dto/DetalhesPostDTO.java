@@ -16,5 +16,4 @@ public record DetalhesPostDTO(Long codigo, String titulo, String conteudo, Strin
         this(post.getCodigo(), post.getTitulo(), post.getConteudo(), post.getDetalhesPost().getNomeAutor(),
                 post.getDetalhesPost().getDataCriacao(), post.getDetalhesPost().getDataPublicacao());
     }
-
 }

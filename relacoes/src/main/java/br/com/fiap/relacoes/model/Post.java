@@ -1,14 +1,16 @@
 package br.com.fiap.relacoes.model;
 
-import br.com.fiap.relacoes.dto.CriarPostDTO;
+import br.com.fiap.relacoes.dto.CadastrarPostDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.List;
 
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 
@@ -30,7 +32,7 @@ public class Post {
     @OneToMany(mappedBy = "post")
     private List<Comentario> comentario;
 
-    @OneToOne(mappedBy = "post", cascade = CascadeType.PERSIST)
+    @OneToOne(mappedBy = "post", cascade = CascadeType.ALL)
     private DetalhesPost detalhesPost;
 
     @ManyToMany
@@ -39,10 +41,11 @@ public class Post {
         inverseJoinColumns = @JoinColumn(name = "cd_tag"))
     private List<Tag> tag;
 
-    public Post(CriarPostDTO dto){
-        this.titulo = dto.titulo();
-        this.conteudo = dto.conteudo();
-        this.detalhesPost = new DetalhesPost(dto.detalhesPost());
+    public Post(CadastrarPostDTO dto){
+        titulo = dto.titulo();
+        conteudo = dto.conteudo();
+        detalhesPost = new DetalhesPost(dto);
+        detalhesPost.setPost(this);
     }
 
 }

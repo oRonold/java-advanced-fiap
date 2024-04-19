@@ -1,16 +1,18 @@
 package br.com.fiap.relacoes.model;
 
-import br.com.fiap.relacoes.dto.CriarDetalhesDTO;
+import br.com.fiap.relacoes.dto.CadastrarPostDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDate;
 
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 
@@ -22,7 +24,7 @@ public class DetalhesPost {
     @Id
     @GeneratedValue
     @Column(name = "cd_detalhes_post")
-    private long codigo;
+    private Long codigo;
 
     @Column(name = "nm_autor", length = 50, nullable = false)
     private String nomeAutor;
@@ -34,12 +36,13 @@ public class DetalhesPost {
     @Column(name = "dt_publicacao", nullable = false)
     private LocalDate dataPublicacao;
 
-    @OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
-    @JoinColumn(name = "cd_post")
+    @OneToOne
+    @JoinColumn(name = "cd_post", nullable = false, unique = true)
     private Post post;
 
-    public DetalhesPost(CriarDetalhesDTO dto){
-        this.nomeAutor = dto.autor();
-        this.dataPublicacao = dto.dataPublicacao();
+    public DetalhesPost(CadastrarPostDTO dto){
+        nomeAutor = dto.autor();
+        dataPublicacao = dto.dataPublicacao();
     }
+
 }
