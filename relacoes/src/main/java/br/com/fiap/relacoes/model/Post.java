@@ -1,5 +1,6 @@
 package br.com.fiap.relacoes.model;
 
+import br.com.fiap.relacoes.dto.AtualizarPostDTO;
 import br.com.fiap.relacoes.dto.CadastrarPostDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -47,5 +48,15 @@ public class Post {
         detalhesPost = new DetalhesPost(dto);
         detalhesPost.setPost(this);
     }
+
+    public void atualizarInformacoes(AtualizarPostDTO dto){
+        if(dto.titulo() != null){
+            this.titulo = dto.titulo();
+        }
+        if(dto.autor() != null){
+            this.detalhesPost.setNomeAutor(dto.autor());
+        }
+    }
+
 
 }
