@@ -1,14 +1,12 @@
 package br.com.fiap.relacoes.dto;
 
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 
 public record CadastrarComentarioDTO(
-        @NotEmpty
-        @Size(max = 500)
+        @NotBlank @Size(max = 100)
         String conteudo,
-        @NotEmpty
-        @Size(max = 100)
+
+        @NotBlank @Size(max = 50)
         String autor) {
 }

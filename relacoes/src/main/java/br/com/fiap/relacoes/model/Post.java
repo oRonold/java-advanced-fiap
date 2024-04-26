@@ -30,7 +30,7 @@ public class Post {
     @Column(name = "ds_conteudo", length = 500, nullable = false)
     private String conteudo;
 
-    @OneToMany(mappedBy = "post")
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
     private List<Comentario> comentario;
 
     @OneToOne(mappedBy = "post", cascade = CascadeType.ALL)
@@ -49,14 +49,13 @@ public class Post {
         detalhesPost.setPost(this);
     }
 
-    public void atualizarInformacoes(AtualizarPostDTO dto){
+    public void atualizar(AtualizarPostDTO dto) {
         if(dto.titulo() != null){
-            this.titulo = dto.titulo();
+            titulo = dto.titulo();
         }
         if(dto.autor() != null){
-            this.detalhesPost.setNomeAutor(dto.autor());
+            detalhesPost.setNomeAutor(dto.autor());
         }
+
     }
-
-
 }

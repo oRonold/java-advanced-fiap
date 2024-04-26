@@ -1,5 +1,6 @@
 package br.com.fiap.relacoes.model;
 
+import br.com.fiap.relacoes.dto.AtualizarComentarioDTO;
 import br.com.fiap.relacoes.dto.CadastrarComentarioDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -41,9 +42,17 @@ public class Comentario {
     private Post post;
 
     public Comentario(CadastrarComentarioDTO dto){
-        this.conteudo = dto.conteudo();
-        this.nomeAutor = dto.autor();
+        conteudo = dto.conteudo();
+        nomeAutor = dto.autor();
+    }
 
+    public void atualizar(AtualizarComentarioDTO dto){
+        if(dto.autor() != null){
+            this.nomeAutor = dto.autor();
+        }
+        if(dto.conteudo() != null){
+            this.conteudo = dto.conteudo();
+        }
     }
 
 
