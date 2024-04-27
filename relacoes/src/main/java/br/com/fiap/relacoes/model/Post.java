@@ -36,7 +36,7 @@ public class Post {
     @OneToOne(mappedBy = "post", cascade = CascadeType.ALL)
     private DetalhesPost detalhesPost;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "EXE_JV_TB_TAG_POST",
         joinColumns = @JoinColumn(name = "cd_post"),
         inverseJoinColumns = @JoinColumn(name = "cd_tag"))
@@ -48,7 +48,6 @@ public class Post {
         detalhesPost = new DetalhesPost(dto);
         detalhesPost.setPost(this);
     }
-
     public void atualizar(AtualizarPostDTO dto) {
         if(dto.titulo() != null){
             titulo = dto.titulo();

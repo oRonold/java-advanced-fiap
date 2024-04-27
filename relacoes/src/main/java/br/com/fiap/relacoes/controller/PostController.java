@@ -2,9 +2,11 @@ package br.com.fiap.relacoes.controller;
 
 import br.com.fiap.relacoes.dto.*;
 import br.com.fiap.relacoes.model.Post;
-import br.com.fiap.relacoes.repository.DetalhesPostRepository;
+import br.com.fiap.relacoes.model.Tag;
 import br.com.fiap.relacoes.repository.PostRepository;
+import br.com.fiap.relacoes.repository.TagRepository;
 import br.com.fiap.relacoes.service.ComentarioService;
+import br.com.fiap.relacoes.service.TagService;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -24,7 +27,13 @@ public class PostController {
     private PostRepository postRepository;
 
     @Autowired
+    private TagRepository tagRepository;
+
+    @Autowired
     private ComentarioService service;
+
+    @Autowired
+    private TagService tagService;
 
     @PostMapping
     @Transactional
@@ -37,7 +46,7 @@ public class PostController {
 
     @PostMapping("/{id}/comentarios")
     @Transactional
-    public ResponseEntity<DetalhesComentariosDTO> cadastrar(@PathVariable Long id, @RequestBody @Valid CadastrarComentarioDTO dto, UriComponentsBuilder builder){
+    public ResponseEntity<DetalhesComentariosDTO> adicionarComentario(@PathVariable Long id, @RequestBody @Valid CadastrarComentarioDTO dto, UriComponentsBuilder builder){
         var comentario = service.adicionarComentario(id, dto);
         var uri = builder.path("/{id}").buildAndExpand(comentario.getCodigo()).toUri();
         return ResponseEntity.created(uri).body(new DetalhesComentariosDTO(comentario));
@@ -63,11 +72,36 @@ public class PostController {
         return ResponseEntity.ok().body(new DetalhesPostDTO(post));
     }
 
+    @PutMapping("/{post}/tags/{tag}")
+    @Transactional
+    public ResponseEntity<DetalhesTagPostDTO> adicionarTag(@PathVariable("post") Long postId, @PathVariable("tag") Long tagId){
+        var post = tagService.adicionarTagAoPost(postId, tagId);
+        return ResponseEntity.ok().body(new DetalhesTagPostDTO(post));
+    }
+
     @DeleteMapping("/{id}")
     @Transactional
     public ResponseEntity<Void> excluir(@PathVariable Long id){
         var post = postRepository.getReferenceById(id);
         postRepository.delete(post);
+        return ResponseEntity.noContent().build();
+    }
+
+    @DeleteMapping("/{idPost}/tags/{idTag}")
+    @Transactional
+    public ResponseEntity<Void> removerTag(@PathVariable("idPost") Long idPost, @PathVariable("idTag") Long idTag){
+        var post = postRepository.getReferenceById(idPost);
+        var tag = tagRepository.getReferenceById(idTag);
+        post.getTag().remove(tag);
+        return ResponseEntity.noContent().build();
+    }
+
+
+    @DeleteMapping("/{id}/tags")
+    @Transactional
+    public ResponseEntity<Void> removerTodasTags(@PathVariable Long id){
+        var post = postRepository.getReferenceById(id);
+        post.getTag().removeAll(post.getTag());
         return ResponseEntity.noContent().build();
     }
 

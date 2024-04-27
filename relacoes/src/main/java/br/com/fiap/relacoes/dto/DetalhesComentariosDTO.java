@@ -6,7 +6,7 @@ import br.com.fiap.relacoes.model.Post;
 
 import java.time.LocalDate;
 
-public record DetalhesComentariosDTO(Long codigo, String conteudo, String nomeAutor, LocalDate dataCriacao, DetalhesPostDTO detalhesPost) {
+public record DetalhesComentariosDTO(Long codigo, String conteudo, String autor, LocalDate dataCriacao, DetalhesPostDTO detalhesPost) {
 
     public DetalhesComentariosDTO(Comentario comentario){
         this(comentario.getCodigo(), comentario.getConteudo(),
