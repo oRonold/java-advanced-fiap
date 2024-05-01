@@ -16,7 +16,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
 @RequestMapping("/tags")
-public class TagsController {
+public class TagController {
 
     @Autowired
     private TagRepository repository;
