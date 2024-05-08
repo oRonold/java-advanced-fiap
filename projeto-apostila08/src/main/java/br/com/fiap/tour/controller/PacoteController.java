@@ -48,6 +48,12 @@ public class PacoteController {
         return ResponseEntity.ok(pacote);
     }
 
+    @GetMapping("/por-destino")
+    public ResponseEntity<Page<DetalhesPacoteDTO>> pesquisarPorDestino(@RequestParam("id") Long id, Pageable pageable){
+        var pacotes = pacoteRepository.pacotePorDestino(id, pageable).map(DetalhesPacoteDTO::new);
+        return ResponseEntity.ok(pacotes);
+    }
+
     @PutMapping("/{id}")
     @Transactional
     public ResponseEntity<DetalhesPacoteDTO> atualizar(@PathVariable("id") Long id, @RequestBody @Valid AtualizacaoPacoteDTO dto){

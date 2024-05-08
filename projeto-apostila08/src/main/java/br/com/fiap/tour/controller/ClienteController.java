@@ -39,6 +39,12 @@ public class ClienteController {
         return ResponseEntity.ok(lista);
     }
 
+    @GetMapping("por-nome")
+    public ResponseEntity<Page<DetalhesClienteDTO>> parteNome(@RequestParam("nome") String nome, Pageable pageable){
+        var clientes = clienteRepository.buscarPorNome(nome, pageable).map(DetalhesClienteDTO::new);
+        return ResponseEntity.ok(clientes);
+    }
+
     @PostMapping
     @Transactional
     public ResponseEntity<DetalhesClienteDTO> cadastrar(@RequestBody @Valid CadastroClienteDTO dto, UriComponentsBuilder builder) {
@@ -51,7 +57,7 @@ public class ClienteController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<DetalhesClienteDTO>> pesquisar(Pageable pageable){
+    public ResponseEntity<Page<DetalhesClienteDTO>> listar(Pageable pageable){
         var page = clienteRepository.findAll(pageable).map(DetalhesClienteDTO::new);
         return ResponseEntity.ok(page);
     }
@@ -60,6 +66,18 @@ public class ClienteController {
     public ResponseEntity<DetalhesClienteDTO> pesquisar(@PathVariable("id") Long id){
         var cliente = new DetalhesClienteDTO(clienteRepository.getReferenceById(id));
         return ResponseEntity.ok(cliente);
+    }
+
+    @GetMapping("por-cidade")
+    public ResponseEntity<Page<DetalhesClienteDTO>> pesquisarPorCidade(@RequestParam("cidade") String nome, Pageable pageable){
+        var clientes = clienteRepository.buscarPorCidade(nome, pageable).map(DetalhesClienteDTO::new);
+        return ResponseEntity.ok(clientes);
+    }
+
+    @GetMapping("por-preco-maior")
+    public ResponseEntity<Page<DetalhesClienteDTO>> pesquisarPorPrecoMaior(@RequestParam("valor") Double valor, Pageable pageable){
+        var clientes = clienteRepository.buscarPorPrecoMaior(valor, pageable).map(DetalhesClienteDTO::new);
+        return ResponseEntity.ok(clientes);
     }
 
     @PutMapping("/{id}")
