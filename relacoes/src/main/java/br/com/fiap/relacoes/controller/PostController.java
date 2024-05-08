@@ -101,7 +101,7 @@ public class PostController {
     @Transactional
     public ResponseEntity<Void> removerTodasTags(@PathVariable Long id){
         var post = postRepository.getReferenceById(id);
-        post.getTag().removeAll(post.getTag());
+        post.getTag().clear();
         return ResponseEntity.noContent().build();
     }
 

@@ -9,12 +9,18 @@
         <outputRelativeToContentRoot value="true" />
         <module name="aula04" />
         <module name="relacoes" />
+        <module name="projeto04" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="projeto08" target="17" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="aula04" options="-parameters" />
+      <module name="projeto04" options="-parameters" />
+      <module name="projeto08" options="-parameters" />
       <module name="relacoes" options="-parameters" />
     </option>
   </component>
