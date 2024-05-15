@@ -8,6 +8,7 @@ import br.com.fiap.tour.dto.cidade.DetalhesCidadeDTO;
 import br.com.fiap.tour.dto.cliente.AtualizacaoClienteDTO;
 import br.com.fiap.tour.dto.cliente.CadastroClienteDTO;
 import br.com.fiap.tour.dto.cliente.DetalhesClienteDTO;
+import br.com.fiap.tour.dto.pacote.DetalhesPacoteDTO;
 import br.com.fiap.tour.repository.CidadeRepository;
 import br.com.fiap.tour.repository.ClienteRepository;
 import jakarta.validation.Valid;
@@ -68,16 +69,21 @@ public class ClienteController {
         return ResponseEntity.ok(cliente);
     }
 
-    @GetMapping("por-cidade")
+    @GetMapping("por-estado")
     public ResponseEntity<Page<DetalhesClienteDTO>> pesquisarPorCidade(@RequestParam("cidade") String nome, Pageable pageable){
-        var clientes = clienteRepository.buscarPorCidade(nome, pageable).map(DetalhesClienteDTO::new);
+        var clientes = clienteRepository.buscarPorEstado(nome, pageable).map(DetalhesClienteDTO::new);
         return ResponseEntity.ok(clientes);
     }
 
     @GetMapping("por-preco-maior")
-    public ResponseEntity<Page<DetalhesClienteDTO>> pesquisarPorPrecoMaior(@RequestParam("valor") Double valor, Pageable pageable){
-        var clientes = clienteRepository.buscarPorPrecoMaior(valor, pageable).map(DetalhesClienteDTO::new);
+    public ResponseEntity<Page<DetalhesClienteDTO>> pesquisarPorValorPacote(@RequestParam("valor") Double valor, Pageable pageable){
+        var clientes = clienteRepository.buscarPorValorPacote(valor, pageable).map(DetalhesClienteDTO::new);
         return ResponseEntity.ok(clientes);
+    }
+
+    @GetMapping("/por-cliente-cidade")
+    public ResponseEntity<Page<DetalhesClienteDTO>> buscarPorNomeECidade(@RequestParam("cliente") String nome, @RequestParam("cidade") String cidade, Pageable pageable){
+        var cliente = clienteRepository.buscarPorNomeClienteCidade(nome, cidade, pageable).map(DetalhesClienteDTO::new);
     }
 
     @PutMapping("/{id}")
