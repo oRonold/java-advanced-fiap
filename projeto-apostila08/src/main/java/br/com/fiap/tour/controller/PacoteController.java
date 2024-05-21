@@ -62,6 +62,12 @@ public class PacoteController {
         return ResponseEntity.ok(pacotes);
     }
 
+    @GetMapping("somar-pacote-valor")
+    public ResponseEntity<Float> somarValorPacote(@RequestParam("destino") String destino){
+        var valor = pacoteRepository.somarPrecosPacotesPorDestino(destino);
+        return ResponseEntity.ok().body(valor);
+    }
+
     @PutMapping("/{id}")
     @Transactional
     public ResponseEntity<DetalhesPacoteDTO> atualizar(@PathVariable("id") Long id, @RequestBody @Valid AtualizacaoPacoteDTO dto){

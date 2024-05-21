@@ -69,13 +69,13 @@ public class ClienteController {
         return ResponseEntity.ok(cliente);
     }
 
-    @GetMapping("por-estado")
-    public ResponseEntity<Page<DetalhesClienteDTO>> pesquisarPorCidade(@RequestParam("cidade") String nome, Pageable pageable){
-        var clientes = clienteRepository.buscarPorEstado(nome, pageable).map(DetalhesClienteDTO::new);
+    @GetMapping("/por-nome-cidade")
+    public ResponseEntity<Page<DetalhesClienteDTO>> buscarPorEstado(@RequestParam("cidade") String cidade, Pageable pageable){
+        var clientes = clienteRepository.buscarPorEstado(cidade, pageable).map(DetalhesClienteDTO::new);
         return ResponseEntity.ok(clientes);
     }
 
-    @GetMapping("por-preco-maior")
+    @GetMapping("/por-preco-maior")
     public ResponseEntity<Page<DetalhesClienteDTO>> pesquisarPorValorPacote(@RequestParam("valor") Double valor, Pageable pageable){
         var clientes = clienteRepository.buscarPorValorPacote(valor, pageable).map(DetalhesClienteDTO::new);
         return ResponseEntity.ok(clientes);
@@ -84,6 +84,19 @@ public class ClienteController {
     @GetMapping("/por-cliente-cidade")
     public ResponseEntity<Page<DetalhesClienteDTO>> buscarPorNomeECidade(@RequestParam("cliente") String nome, @RequestParam("cidade") String cidade, Pageable pageable){
         var cliente = clienteRepository.buscarPorNomeClienteCidade(nome, cidade, pageable).map(DetalhesClienteDTO::new);
+        return ResponseEntity.ok(cliente);
+    }
+
+    @GetMapping("por-lista-estados")
+    public ResponseEntity<Page<DetalhesClienteDTO>> listarPorEstado(@RequestParam("estados") List<String> estados, Pageable pageable){
+        var clientes = clienteRepository.listarPorEstado(estados, pageable).map(DetalhesClienteDTO::new);
+        return ResponseEntity.ok(clientes);
+    }
+
+    @GetMapping("/contar-clientes-estado")
+    public ResponseEntity<Long> contarClientesEstado(@RequestParam("estado") String estado){
+        var clientes = clienteRepository.contarQtdClienteEstado(estado);
+        return ResponseEntity.ok().body(clientes);
     }
 
     @PutMapping("/{id}")

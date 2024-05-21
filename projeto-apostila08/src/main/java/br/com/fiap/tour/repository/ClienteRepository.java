@@ -18,16 +18,22 @@ public interface ClienteRepository extends JpaRepository<Cliente, Long> {
     @Query("select c from Cliente c where c.dataNascimento = ?1")
     Page<Cliente> buscarPorDataNascimento(LocalDate dataNascimento, Pageable page);
 
-    @Query("from Cliente c where c.nome like %?1%")
+    @Query("from Cliente c where lower(c.nome) like %?1%")
     Page<Cliente> buscarPorNome(String nome, Pageable page);
 
-    @Query("from Cliente c where c.endereco.cidade.uf like %?1%")
+    @Query("from Cliente c where c.endereco.cidade.nome like %?1%")
     Page<Cliente> buscarPorEstado(String nome, Pageable pageable);
 
-    @Query("select cliente from Reserva r where r.pacote.valor > ?1")
+    @Query("select r.cliente from Reserva r where r.pacote.valor > ?1")
     Page<Cliente> buscarPorValorPacote(Double valor, Pageable pageable);
 
     @Query("from Cliente c where c.nome like %?1% and c.endereco.cidade.nome like %?2%")
-    Page<Pacote> buscarPorNomeClienteCidade(String cliente, String cidade, Pageable pageable);
+    Page<Cliente> buscarPorNomeClienteCidade(String cliente, String cidade, Pageable pageable);
+
+    @Query("from Cliente c where c.endereco.cidade.uf in ?1")
+    Page<Cliente> listarPorEstado(List<String> estados, Pageable pageable);
+
+    @Query("select count(c) from Cliente c where c.endereco.cidade.uf = ?1")
+    Long contarQtdClienteEstado(String estado);
 
 }
