@@ -18,6 +18,6 @@ public interface PacoteRepository extends JpaRepository<Pacote, Long> {
     Page<Pacote> buscarPorDatas(LocalDate inicio, LocalDate fim, Pageable pageable);
 
     @Query("select sum(p.valor) from Pacote p where p.destino.nome = ?1")
-    Float somarPrecosPacotesPorDestino(String destingo);
+    Double somarPrecosPacotesPorDestino(String destino);
 
 }

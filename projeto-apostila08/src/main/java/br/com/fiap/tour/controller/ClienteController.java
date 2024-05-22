@@ -1,14 +1,10 @@
 package br.com.fiap.tour.controller;
 
-import br.com.fiap.tour.domain.Cidade;
 import br.com.fiap.tour.domain.Cliente;
-import br.com.fiap.tour.dto.cidade.AtualizacaoCidadeDTO;
-import br.com.fiap.tour.dto.cidade.CadastroCidadeDTO;
-import br.com.fiap.tour.dto.cidade.DetalhesCidadeDTO;
+import br.com.fiap.tour.dto.cliente.RetornaTotalClientesDTO;
 import br.com.fiap.tour.dto.cliente.AtualizacaoClienteDTO;
 import br.com.fiap.tour.dto.cliente.CadastroClienteDTO;
 import br.com.fiap.tour.dto.cliente.DetalhesClienteDTO;
-import br.com.fiap.tour.dto.pacote.DetalhesPacoteDTO;
 import br.com.fiap.tour.repository.CidadeRepository;
 import br.com.fiap.tour.repository.ClienteRepository;
 import jakarta.validation.Valid;
@@ -94,9 +90,9 @@ public class ClienteController {
     }
 
     @GetMapping("/contar-clientes-estado")
-    public ResponseEntity<Long> contarClientesEstado(@RequestParam("estado") String estado){
+    public ResponseEntity<RetornaTotalClientesDTO> contarClientesEstado(@RequestParam("estado") String estado){
         var clientes = clienteRepository.contarQtdClienteEstado(estado);
-        return ResponseEntity.ok().body(clientes);
+        return ResponseEntity.ok().body(new RetornaTotalClientesDTO(estado, clientes));
     }
 
     @PutMapping("/{id}")

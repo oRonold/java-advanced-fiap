@@ -18,7 +18,7 @@ public interface ClienteRepository extends JpaRepository<Cliente, Long> {
     @Query("select c from Cliente c where c.dataNascimento = ?1")
     Page<Cliente> buscarPorDataNascimento(LocalDate dataNascimento, Pageable page);
 
-    @Query("from Cliente c where lower(c.nome) like %?1%")
+    @Query("from Cliente c where lower(c.nome) like lower(concat('%',?1,'%'))")
     Page<Cliente> buscarPorNome(String nome, Pageable page);
 
     @Query("from Cliente c where c.endereco.cidade.nome like %?1%")

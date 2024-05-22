@@ -4,6 +4,7 @@ import br.com.fiap.tour.domain.Pacote;
 import br.com.fiap.tour.dto.pacote.AtualizacaoPacoteDTO;
 import br.com.fiap.tour.dto.pacote.CadastroPacoteDTO;
 import br.com.fiap.tour.dto.pacote.DetalhesPacoteDTO;
+import br.com.fiap.tour.dto.pacote.TotalPacoteDTO;
 import br.com.fiap.tour.repository.DestinoRepository;
 import br.com.fiap.tour.repository.PacoteRepository;
 import jakarta.validation.Valid;
@@ -62,10 +63,10 @@ public class PacoteController {
         return ResponseEntity.ok(pacotes);
     }
 
-    @GetMapping("somar-pacote-valor")
-    public ResponseEntity<Float> somarValorPacote(@RequestParam("destino") String destino){
+    @GetMapping("/somar-pacote-valor")
+    public ResponseEntity<TotalPacoteDTO> somarValorPacote(@RequestParam("destino") String destino){
         var valor = pacoteRepository.somarPrecosPacotesPorDestino(destino);
-        return ResponseEntity.ok().body(valor);
+        return ResponseEntity.ok(new TotalPacoteDTO(destino, valor));
     }
 
     @PutMapping("/{id}")

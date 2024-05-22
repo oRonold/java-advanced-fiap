@@ -17,6 +17,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.time.LocalDate;
+
 @RestController
 @RequestMapping("/reservas")
 public class ReservaController {
@@ -42,6 +44,12 @@ public class ReservaController {
     @GetMapping("/{id}")
     public ResponseEntity<DetalhesReservaDTO> pesquisar(@PathVariable("id") Long id){
         var reserva = new DetalhesReservaDTO(reservaRepository.getReferenceById(id));
+        return ResponseEntity.ok(reserva);
+    }
+
+    @GetMapping("por-data")
+    public ResponseEntity<Page<DetalhesReservaDTO>> porDatas(@RequestParam("data1") LocalDate data1, @RequestParam("data2") LocalDate data2, Pageable pageable){
+        var reserva = reservaRepository.findByDataBetween(data1, data2, pageable).map(DetalhesReservaDTO::new);
         return ResponseEntity.ok(reserva);
     }
 

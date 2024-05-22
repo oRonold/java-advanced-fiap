@@ -42,6 +42,12 @@ public class DestinoController {
         return ResponseEntity.ok(destino);
     }
 
+    @GetMapping("/por-parte-nome")
+    public ResponseEntity<Page<DetalhesDestinoDTO>> porParteNome(@RequestParam("nome") String nome, Pageable pageable){
+        var destinos = destinoRepository.findByNomeContainingIgnoreCase(nome, pageable).map(DetalhesDestinoDTO::new);
+        return ResponseEntity.ok(destinos);
+    }
+
     @PutMapping("/{id}")
     @Transactional
     public ResponseEntity<DetalhesDestinoDTO> atualizar(@PathVariable("id") Long id, @RequestBody @Valid AtualizacaoDestinoDTO dto){
