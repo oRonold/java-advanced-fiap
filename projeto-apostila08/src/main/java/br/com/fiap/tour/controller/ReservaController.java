@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @RestController
 @RequestMapping("/reservas")
@@ -47,9 +48,15 @@ public class ReservaController {
         return ResponseEntity.ok(reserva);
     }
 
-    @GetMapping("por-data")
-    public ResponseEntity<Page<DetalhesReservaDTO>> porDatas(@RequestParam("data1") LocalDate data1, @RequestParam("data2") LocalDate data2, Pageable pageable){
-        var reserva = reservaRepository.findByDataBetween(data1, data2, pageable).map(DetalhesReservaDTO::new);
+    @GetMapping("/por-data")
+    public ResponseEntity<Page<DetalhesReservaDTO>> porDatas(@RequestParam("inicio") LocalDateTime inicio, @RequestParam("fim") LocalDateTime fim, Pageable pageable){
+        var reserva = reservaRepository.findByDataBetween(inicio, fim, pageable).map(DetalhesReservaDTO::new);
+        return ResponseEntity.ok(reserva);
+    }
+
+    @GetMapping("por-cpf")
+    public ResponseEntity<Page<DetalhesReservaDTO>> buscarPorCpfCliente(@RequestParam("cpf") String cpf, Pageable pageable){
+        var reserva = reservaRepository.findByClienteCpfEquals(cpf, pageable).map(DetalhesReservaDTO::new);
         return ResponseEntity.ok(reserva);
     }
 

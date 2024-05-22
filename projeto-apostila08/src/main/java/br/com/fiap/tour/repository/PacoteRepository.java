@@ -20,4 +20,6 @@ public interface PacoteRepository extends JpaRepository<Pacote, Long> {
     @Query("select sum(p.valor) from Pacote p where p.destino.nome = ?1")
     Double somarPrecosPacotesPorDestino(String destino);
 
+    Page<Pacote> findByValorLessThan(Float valor, Pageable pageable);
+
 }

@@ -69,6 +69,12 @@ public class PacoteController {
         return ResponseEntity.ok(new TotalPacoteDTO(destino, valor));
     }
 
+    @GetMapping("por-valor-menor")
+    public ResponseEntity<Page<DetalhesPacoteDTO>> buscarPorValorMenor(@RequestParam("valor") Float valor, Pageable pageable){
+        var pacotes = pacoteRepository.findByValorLessThan(valor, pageable).map(DetalhesPacoteDTO::new);
+        return ResponseEntity.ok(pacotes);
+    }
+
     @PutMapping("/{id}")
     @Transactional
     public ResponseEntity<DetalhesPacoteDTO> atualizar(@PathVariable("id") Long id, @RequestBody @Valid AtualizacaoPacoteDTO dto){
