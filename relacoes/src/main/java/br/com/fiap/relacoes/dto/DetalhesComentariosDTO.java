@@ -1,8 +1,6 @@
 package br.com.fiap.relacoes.dto;
 
-import br.com.fiap.relacoes.model.Comentario;
-import br.com.fiap.relacoes.model.DetalhesPost;
-import br.com.fiap.relacoes.model.Post;
+import br.com.fiap.relacoes.model.blog.Comentario;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.time.LocalDate;

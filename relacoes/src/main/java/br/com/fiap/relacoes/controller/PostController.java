@@ -1,8 +1,7 @@
 package br.com.fiap.relacoes.controller;
 
 import br.com.fiap.relacoes.dto.*;
-import br.com.fiap.relacoes.model.Post;
-import br.com.fiap.relacoes.model.Tag;
+import br.com.fiap.relacoes.model.blog.Post;
 import br.com.fiap.relacoes.repository.PostRepository;
 import br.com.fiap.relacoes.repository.TagRepository;
 import br.com.fiap.relacoes.service.ComentarioService;
@@ -15,9 +14,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @RestController
 @RequestMapping("/posts")

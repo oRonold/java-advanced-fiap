@@ -1,4 +1,4 @@
-package br.com.fiap.relacoes.model;
+package br.com.fiap.relacoes.model.blog;
 
 import br.com.fiap.relacoes.dto.AtualizarTagDTO;
 import br.com.fiap.relacoes.dto.CadastrarTagDTO;

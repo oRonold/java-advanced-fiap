@@ -1,6 +1,6 @@
 package br.com.fiap.relacoes.service;
 
-import br.com.fiap.relacoes.model.Post;
+import br.com.fiap.relacoes.model.blog.Post;
 import br.com.fiap.relacoes.repository.PostRepository;
 import br.com.fiap.relacoes.repository.TagRepository;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,12 +1,10 @@
 package br.com.fiap.relacoes.dto;
 
-import br.com.fiap.relacoes.model.Post;
-import br.com.fiap.relacoes.model.Tag;
+import br.com.fiap.relacoes.model.blog.Post;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.stream.Collectors;
 
 public record DetalhesTagPostDTO(Long codigo, String titulo, String conteudo, String autor,

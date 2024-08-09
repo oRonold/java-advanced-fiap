@@ -3,7 +3,7 @@ package br.com.fiap.relacoes.controller;
 import br.com.fiap.relacoes.dto.AtualizarTagDTO;
 import br.com.fiap.relacoes.dto.CadastrarTagDTO;
 import br.com.fiap.relacoes.dto.DetalhesTagDTO;
-import br.com.fiap.relacoes.model.Tag;
+import br.com.fiap.relacoes.model.blog.Tag;
 import br.com.fiap.relacoes.repository.TagRepository;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;

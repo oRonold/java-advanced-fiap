@@ -1,8 +1,7 @@
 package br.com.fiap.relacoes.service;
 
 import br.com.fiap.relacoes.dto.CadastrarComentarioDTO;
-import br.com.fiap.relacoes.dto.DetalhesPostDTO;
-import br.com.fiap.relacoes.model.Comentario;
+import br.com.fiap.relacoes.model.blog.Comentario;
 import br.com.fiap.relacoes.repository.ComentarioRepository;
 import br.com.fiap.relacoes.repository.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
