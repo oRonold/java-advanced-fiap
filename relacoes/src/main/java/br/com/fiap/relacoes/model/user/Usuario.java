@@ -8,6 +8,8 @@ import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.Collection;
 import java.util.List;
@@ -29,9 +31,9 @@ public class Usuario implements UserDetails {
     @Column(name = "ds_senha", nullable = false)
     private String senha;
 
-    public Usuario(CadastrarUsuarioDTO dto){
+    public Usuario(CadastrarUsuarioDTO dto, String senha){
         this.login = dto.login();
-        this.senha = dto.senha();
+        this.senha = senha;
     }
 
     @Override
