@@ -3,7 +3,7 @@ package br.com.fiap.relacoes.controller;
 import br.com.fiap.relacoes.dto.DadosAutenticacaoDTO;
 import br.com.fiap.relacoes.dto.DadosTokenJwtDTO;
 import br.com.fiap.relacoes.model.user.Usuario;
-import br.com.fiap.relacoes.security.TokenService;
+import br.com.fiap.relacoes.service.TokenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;

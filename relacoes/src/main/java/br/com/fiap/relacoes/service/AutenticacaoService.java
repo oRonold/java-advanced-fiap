@@ -1,4 +1,4 @@
-package br.com.fiap.relacoes.security;
+package br.com.fiap.relacoes.service;
 
 import br.com.fiap.relacoes.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;

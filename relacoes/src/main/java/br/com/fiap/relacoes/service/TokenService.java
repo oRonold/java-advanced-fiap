@@ -1,4 +1,4 @@
-package br.com.fiap.relacoes.security;
+package br.com.fiap.relacoes.service;
 
 import br.com.fiap.relacoes.model.user.Usuario;
 import com.auth0.jwt.JWT;
