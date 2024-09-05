@@ -1,11 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Cadastro de Produtos</title>
 </head>
 <body>
     <h1>Cadastro de Produtos</h1>
+    <p th:text="${nome}"></p>
+    <p th:text="${preco}"></p>
 
     <form action="/produto/cadastro" method="post">
         <label for="nome">Nome:</label>
