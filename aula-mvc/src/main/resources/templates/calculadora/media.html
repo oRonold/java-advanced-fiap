@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
 <head>
     <meta charset="UTF-8">
     <title>Calculadora</title>
@@ -11,7 +13,7 @@
     <p th:if="!${#strings.isEmpty(disciplina)}">A média final é: <span th:text="${disciplina}"></span>
     <span th:text="${disciplina > 6 ? 'Passou de ano!' : 'Reprovado'}"></span></p>
 
-    <form action="/calculadora/media" method="post">
+    <form action="/calculadora/media" method="post" layout:decorate="conteudo">
         <div>
             <lab for="media">Media Primeiro Semestre</lab>
             <input type="number" id="media" name="media" placeholder="Digite a média do primeiro semestre">
