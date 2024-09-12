@@ -1,36 +1,44 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
 <head>
     <meta charset="UTF-8">
     <title>Calculadora</title>
 </head>
 <body>
+<div layout:fragment="conteudo">
+    <h1>Calculadora de Média - FIAP</h1>
 
-    <h1>Calculadora de média</h1>
+    <p th:if="!${#strings.isEmpty(mediaFinal)}">
+        A média final é: <span th:text="${mediaFinal}"></span>
+        <span th:text="${mediaFinal > 6 ? 'Passou de ano!' : 'Tente novamente..'}"></span>
+        <br>
+        Média 1º Semestre: <span th:text="${dis.media}"></span><br>
+        GS: <span th:text="${dis.gs}"></span><br>
+        CP: <span th:text="${dis.cp}"></span><br>
+        Challenge: <span th:text="${dis.challenge}"></span><br>
+    </p>
 
-    <p th:if="!${#strings.isEmpty(disciplina)}">A média final é: <span th:text="${disciplina}"></span>
-    <span th:text="${disciplina > 6 ? 'Passou de ano!' : 'Reprovado'}"></span></p>
-
-    <form action="/calculadora/media" method="post">
-        <div>
-            <lab for="media">Media Primeiro Semestre</lab>
-            <input type="number" id="media" name="media" placeholder="Digite a média do primeiro semestre">
+    <form method="post" action="/calculadora/media">
+        <div class="mb-3">
+            <label class="form-label">Média 1º Semestre</label>
+            <input type="number" name="media" class="form-control">
         </div>
-        <div>
-            <label for="cp">Media CP:</label>
-            <input type="number" id="cp" name="cp" placeholder="Digite a média dos Checkpoints">
+        <div class="mb-3">
+            <label class="form-label">Média Checkpoint</label>
+            <input type="number" name="cp" class="form-control">
         </div>
-        <div>
-            <label for="gs">Global Solution:</label>
-            <input type="number" id="gs" name="gs" placeholder="Digite a nota da Global solutino">
+        <div class="mb-3">
+            <label class="form-label">Nota Global Solution</label>
+            <input type="number" name="gs"class="form-control">
         </div>
-        <div>
-            <label for="challenge">Challenge:</label>
-            <input type="number" id="challenge" name="challenge" placeholder="Digite a nota do challenge">
+        <div class="mb-3">
+            <label class="form-label">Nota Challenge</label>
+            <input type="number" name="challenge"class="form-control">
         </div>
-
-        <button type="submit">Calcular</button>
+        <button type="submit" class="btn btn-outline-primary">Passou de ano?</button>
     </form>
-
+</div>
 </body>
 </html>
