@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Calculadora</title>
+</head>
+<body>
+
+    <h1>Calculadora de média</h1>
+
+    <p th:if="!${#strings.isEmpty(disciplina)}">A média final é: <span th:text="${disciplina}"></span>
+    <span th:text="${disciplina > 6 ? 'Passou de ano!' : 'Reprovado'}"></span></p>
+
+    <form action="/calculadora/media" method="post">
+        <div>
+            <lab for="media">Media Primeiro Semestre</lab>
+            <input type="number" id="media" name="media" placeholder="Digite a média do primeiro semestre">
+        </div>
+        <div>
+            <label for="cp">Media CP:</label>
+            <input type="number" id="cp" name="cp" placeholder="Digite a média dos Checkpoints">
+        </div>
+        <div>
+            <label for="gs">Global Solution:</label>
+            <input type="number" id="gs" name="gs" placeholder="Digite a nota da Global solutino">
+        </div>
+        <div>
+            <label for="challenge">Challenge:</label>
+            <input type="number" id="challenge" name="challenge" placeholder="Digite a nota do challenge">
+        </div>
+
+        <button type="submit">Calcular</button>
+    </form>
+
+</body>
+</html>
