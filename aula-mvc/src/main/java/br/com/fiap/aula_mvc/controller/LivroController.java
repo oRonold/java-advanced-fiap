@@ -6,10 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/livros")
@@ -20,7 +17,7 @@ public class LivroController {
 
     @GetMapping("cadastrar")
     public String cadastro(Livro livro){
-        return "biblioteca/cadastro";
+        return "biblioteca/formulario";
     }
 
     @PostMapping("cadastrar")
@@ -28,11 +25,26 @@ public class LivroController {
     public String cadastrar(@ModelAttribute Livro livro, Model model){
         repository.save(livro);
         model.addAttribute("msg", "Livro cadastrado!");
-        return "biblioteca/cadastro";
+        return "biblioteca/formulario";
     }
 
     @GetMapping("listar")
     public String listar(Model model){
+        model.addAttribute("livros", repository.findAll());
+        return "biblioteca/lista";
+    }
+
+    @GetMapping("/editar/{id}")
+    public String exibirEditar(@PathVariable("id") Long codigo, Model model){
+        model.addAttribute("livro", repository.findById(codigo));
+        return "biblioteca/editar";
+    }
+
+    @PostMapping("editar")
+    @Transactional
+    public String editar(Livro livro, Model model){
+        repository.save(livro);
+        model.addAttribute("msg", "Livro editado!");
         model.addAttribute("livros", repository.findAll());
         return "biblioteca/lista";
     }
