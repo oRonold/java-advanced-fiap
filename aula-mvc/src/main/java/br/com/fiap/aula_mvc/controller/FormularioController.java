@@ -1,6 +1,5 @@
 package br.com.fiap.aula_mvc.controller;
 
-import br.com.fiap.aula_mvc.model.Produto;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,9 +16,10 @@ public class FormularioController {
     }
 
     @PostMapping("cadastro")
-    public String cadastro(Produto produto, Model model){
-        model.addAttribute("prod", produto);
-        model.addAttribute("msg", "Produto cadastrado com sucesso!");
-        return "produto/sucesso";
+    public String cadastro(String nome, Double preco, Model model){
+        model.addAttribute("nome", nome);
+        model.addAttribute("preco", preco);
+        model.addAttribute("msg", "Produto cadastrado com sucesso!" + nome + " " + preco);
+        return "produto/cadastro";
     }
 }

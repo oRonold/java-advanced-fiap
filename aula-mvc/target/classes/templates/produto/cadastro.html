@@ -1,20 +1,24 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
 <head>
     <meta charset="UTF-8">
-    <title>Cadastro de Produtos</title>
+    <title>Cadastro de Produto</title>
 </head>
 <body>
-    <h1>Cadastro de Produtos</h1>
+<div layout:fragment="conteudo">
+    <h1>Cadastro de Produto</h1>
     <p th:text="${nome}"></p>
     <p th:text="${preco}"></p>
 
     <form action="/produto/cadastro" method="post">
-        <label for="nome">Nome:</label>
-        <input type="text" id="nome" name="nome" placeholder="Digite um produto">
-        <label for="preco">Preço:</label>
-        <input type="text" id="preco" name="preco" placeholder="Digite o valor do produto">
+        <label for="nome">Nome</label>
+        <input type="text" id="nome" name="nome">
+        <label for="preco">Preço</label>
+        <input type="number" id="preco" name="preco">
         <button type="submit">Cadastrar</button>
     </form>
+</div>
 </body>
 </html>
