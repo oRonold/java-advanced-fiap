@@ -31,4 +31,10 @@ public class LivroController {
         return "biblioteca/cadastro";
     }
 
+    @GetMapping("listar")
+    public String listar(Model model){
+        model.addAttribute("livros", repository.findAll());
+        return "biblioteca/lista";
+    }
+
 }

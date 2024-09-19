@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Livros</title>
+</head>
+<body>
+    <div class="container" layout:fragment="conteudo">
+        <table class="table">
+            <tr>
+                <th>Titulo</th>
+                <th>Sinopse</th>
+                <th>Preço</th>
+                 <th>ISBN</th>
+                <th>Número de páginas</th>
+                <th>Data Publicação</th>
+                <th>Disponível</th>
+                <th></th>
+            </tr>
+             <tr th:each="livro:${livros}">
+                <td th:text="${livro.titulo}"></td>
+                <td th:text="${livro.sinopse}"></td>
+                <td th:text="${#numbers.formatDecimal(livro.preco, 1, 2)}"></td>
+                 <td th:text="${livro.isbn}"></td>
+                 <td th:text="${livro.paginas}"></td>
+                 <td th:text="${#temporals.format(livro.dataPublicacao, 'dd/MM/yyyy')}"></td>
+                 <td th:text="${livro.disponivel? 'sim' : 'nao'}"></td>
+             </tr>
+        </table>
+    </div>
+
+</body>
+</html>
