@@ -49,4 +49,13 @@ public class LivroController {
         return "biblioteca/lista";
     }
 
+    @PostMapping("excluir")
+    @Transactional
+    public String excluir(@ModelAttribute Livro livro, Model model){
+        System.out.println(livro.getId());
+        repository.delete(livro);
+        model.addAttribute("msg", "Livro excluído!");
+        return "biblioteca/lista";
+    }
+
 }
