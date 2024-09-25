@@ -23,8 +23,6 @@
                 <th></th>
             </tr>
              <tr th:each="livro:${livros}">
-                 <!-- ADICIONA UM INPUT HIDDEN PARA PEGA O ID DO LIVRO-->
-                 <input type="hidden" id="idTeste" name="idTeste" th:value="${livro.id}">
                  <td th:text="${livro.titulo}"></td>
                  <td th:text="${livro.sinopse}"></td>
                  <td th:text="${#numbers.formatDecimal(livro.preco, 1, 2)}"></td>
@@ -36,7 +34,7 @@
                      <a th:href="@{/livros/editar/}+${livro.id}" class="btn btn-outline-primary">Editar</a>
                  </td>
                  <td>
-                     <button th:onclick="|livroId.value = *{livro}|" type="button" class="btn btn-outline-danger btn-sm"
+                     <button th:onclick="|document.getElementById('livroId').value = ${livro.id}|" type="button" class="btn btn-outline-danger btn-sm"
                              data-bs-toggle="modal" data-bs-target="#exampleModal">Excluir</button>
                  </td>
              </tr>
@@ -55,7 +53,7 @@
                     </div>
                     <div class="modal-footer">
                         <form th:action="@{/livros/excluir}" method="post">
-                            <input type="hidden" name="codigo" id="livroId">
+                            <input type="hidden" name="livroId" id="livroId">
                             <button type="button" class="btn btn-secondary"
                                     data-dismiss="modal">Não</button>
                             <button type="submit" class="btn btn-danger">Sim</button>
