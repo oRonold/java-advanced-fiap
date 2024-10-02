@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/livros")
@@ -22,10 +23,10 @@ public class LivroController {
 
     @PostMapping("cadastrar")
     @Transactional
-    public String cadastrar(@ModelAttribute Livro livro, Model model){
+    public String cadastrar(@ModelAttribute Livro livro, RedirectAttributes redirectAttributes){
         repository.save(livro);
-        model.addAttribute("msg", "Livro cadastrado!");
-        return "biblioteca/formulario";
+        redirectAttributes.addFlashAttribute("msg", "Livro Cadastrado!");
+        return "redirect:/livros/listar";
     }
 
     @GetMapping("listar")
@@ -42,19 +43,18 @@ public class LivroController {
 
     @PostMapping("editar")
     @Transactional
-    public String editar(Livro livro, Model model){
+    public String editar(Livro livro, RedirectAttributes redirectAttributes){
         repository.save(livro);
-        model.addAttribute("msg", "Livro editado!");
-        model.addAttribute("livros", repository.findAll());
-        return "biblioteca/lista";
+        redirectAttributes.addFlashAttribute("msg", "Livro Editado!");
+        return "redirect:/livros/listar";
     }
 
     @PostMapping("excluir")
     @Transactional
-    public String excluir(@RequestParam("livroId") Long id, Model model){
+    public String excluir(@RequestParam("livroId") Long id, RedirectAttributes redirectAttributes){
         repository.deleteById(id);
-        model.addAttribute("msg", "Livro excluído!");
-        return "biblioteca/lista";
+        redirectAttributes.addFlashAttribute("msg","Livro Excluido");
+        return "redirect:/livros/listar";
     }
 
 }

@@ -1,9 +1,6 @@
 package br.com.fiap.aula_mvc.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Generated;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -42,4 +39,8 @@ public class Livro {
     @Column(name = "dt_publicacao", nullable = false)
     @DateTimeFormat(pattern = "dd/MM/yyyy")
     private LocalDate dataPublicacao;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "ds_genero", nullable = false)
+    private Genero genero;
 }
