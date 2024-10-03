@@ -15,9 +15,10 @@
                 <th>Titulo</th>
                 <th>Sinopse</th>
                 <th>Preço</th>
-                 <th>ISBN</th>
+                <th>ISBN</th>
                 <th>Número de páginas</th>
                 <th>Data Publicação</th>
+                <th>Gênero</th>
                 <th>Disponível</th>
                 <th></th>
             </tr>
@@ -28,13 +29,13 @@
                  <td th:text="${livro.isbn}"></td>
                  <td th:text="${livro.paginas}"></td>
                  <td th:text="${#temporals.format(livro.dataPublicacao, 'dd/MM/yyyy')}"></td>
+                 <td th:text="${livro.genero.getLabel()}"></td>
                  <td th:text="${livro.disponivel? 'sim' : 'nao'}"></td>
-                 <td th:text="${livro.genero}"></td>
                  <td>
                      <a th:href="@{/livros/editar/}+${livro.id}" class="btn btn-outline-primary">Editar</a>
                  </td>
                  <td>
-                     <button th:onclick="|document.getElementById('livroId').value = ${livro.id}|" type="button" class="btn btn-outline-danger btn-sm"
+                     <button th:onclick="|document.getElementById('livroId').value = ${livro.id}|" type="button" class="btn btn-outline-danger"
                              data-bs-toggle="modal" data-bs-target="#exampleModal">Excluir</button>
                  </td>
              </tr>

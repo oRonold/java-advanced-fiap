@@ -39,7 +39,10 @@
         </div>
         <div class="mb-3">
             <label class="form-label">Gênero</label>
-            <input type="text" class="form-control" th:field="*{genero}">
+            <select class="form-control" th:field="*{genero}">
+                <option th:value="DEFAULT" disabled selected>Selecione um gênero</option>
+                <option th:each="genero : ${generos}" th:value="${genero}" th:text="${genero.label}"></option>
+            </select>
         </div>
         <div class="mb-3">
             <input type="checkbox" th:field="*{disponivel}" >

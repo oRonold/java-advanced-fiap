@@ -3,12 +3,12 @@ package br.com.fiap.aula_mvc.model;
 public enum Genero {
 
     // Enumerated type for book genres like ACAO("Acao")
-    ACAO("Acao"),
+    ACAO("Ação"),
     AVENTURA("Aventura"),
-    COMEDIA("Comedia"),
+    COMEDIA("Comédia"),
     DRAMA("Drama"),
     FANTASIA("Fantasia"),
-    FICCAO("Ficcao"),
+    FICCAO("Ficção"),
     ROMANCE("Romance"),
     SUSPENSE("Suspense"),
     TERROR("Terror");

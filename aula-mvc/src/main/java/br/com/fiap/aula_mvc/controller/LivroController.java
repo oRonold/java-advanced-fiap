@@ -1,5 +1,6 @@
 package br.com.fiap.aula_mvc.controller;
 
+import br.com.fiap.aula_mvc.model.Genero;
 import br.com.fiap.aula_mvc.model.Livro;
 import br.com.fiap.aula_mvc.repository.LivroRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,8 @@ public class LivroController {
     private LivroRepository repository;
 
     @GetMapping("cadastrar")
-    public String cadastro(Livro livro){
+    public String cadastro(Livro livro, Model model){
+        model.addAttribute("generos", Genero.values());
         return "biblioteca/formulario";
     }
 
@@ -38,6 +40,7 @@ public class LivroController {
     @GetMapping("/editar/{id}")
     public String exibirEditar(@PathVariable("id") Long codigo, Model model){
         model.addAttribute("livro", repository.findById(codigo));
+        model.addAttribute("generos", Genero.values());
         return "biblioteca/editar";
     }
 
