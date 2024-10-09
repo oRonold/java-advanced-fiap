@@ -9,10 +9,10 @@
 <body>
 <div class="container" layout:fragment="conteudo">
     <h1>Cadastro de Livro</h1>
-    <div th:if="!${#strings.isEmpty(msg)}" class="alert alert-success">
-        <span th:text="${msg}"></span>
-    </div>
     <form th:action="@{/livros/cadastrar}" method="post" th:object="${livro}">
+        <div class="alert alert-danger" th:if="${#fields.hasErrors('*')}">
+            <p th:each="err : ${#fields.errors('*')}" th:text="${err}"></p>
+        </div>
         <div class="mb-3">
             <label class="form-label">Título</label>
             <input type="text" th:field="*{titulo}" class="form-control">
