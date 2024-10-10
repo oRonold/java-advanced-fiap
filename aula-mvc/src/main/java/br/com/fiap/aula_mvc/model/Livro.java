@@ -1,6 +1,7 @@
 package br.com.fiap.aula_mvc.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 import lombok.Generated;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,24 +19,33 @@ public class Livro {
     @GeneratedValue
     private Long id;
 
+    @NotBlank(message = "Título obrigatório")
     @Column(name = "ds_livro", nullable = false)
     private String titulo;
 
+    @NotBlank(message = "Sinopse obrigátoria")
     @Column(name = "ds_sinopse", nullable = false)
     private String sinopse;
 
+    @Min(value = 0, message = "Preço não pode ser negativo")
+    @NotNull(message = "Preço não pode ser nulo")
     @Column(name = "vl_livro", nullable = false, precision = 5, scale = 2)
     private BigDecimal preco;
 
+    @Min(value = 1, message = "O livro tem que possuir pelo menos uma página")
+    @NotNull(message = "Pagina não pode ser nulo")
     @Column(name = "nr_paginas", nullable = false, precision = 4)
     private Integer paginas;
 
-    @Column(name = "nr_isbn", nullable = false, unique = true, length = 60)
+    @NotBlank(message = "ISBN não pode ser nulo")
+    @Max(value = 13, message = "O ISBN precisa conter 13 dígitos")
+    @Column(name = "nr_isbn", unique = true, length = 60)
     private String isbn;
 
     @Column(name = "st_livro", nullable = false)
     private Boolean disponivel;
 
+    @Past
     @Column(name = "dt_publicacao", nullable = false)
     @DateTimeFormat(pattern = "dd/MM/yyyy")
     private LocalDate dataPublicacao;

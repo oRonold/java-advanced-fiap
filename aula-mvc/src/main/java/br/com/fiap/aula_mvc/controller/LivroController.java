@@ -3,10 +3,12 @@ package br.com.fiap.aula_mvc.controller;
 import br.com.fiap.aula_mvc.model.Genero;
 import br.com.fiap.aula_mvc.model.Livro;
 import br.com.fiap.aula_mvc.repository.LivroRepository;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -25,7 +27,13 @@ public class LivroController {
 
     @PostMapping("cadastrar")
     @Transactional
-    public String cadastrar(@ModelAttribute Livro livro, RedirectAttributes redirectAttributes){
+    public String cadastrar(@ModelAttribute @Valid Livro livro,
+                            BindingResult bindingResult,
+                            RedirectAttributes redirectAttributes, Model model){
+        if(bindingResult.hasErrors()){
+            model.addAttribute("generos", Genero.values());
+            return "biblioteca/formulario";
+        }
         repository.save(livro);
         redirectAttributes.addFlashAttribute("msg", "Livro Cadastrado!");
         return "redirect:/livros/listar";
@@ -46,7 +54,11 @@ public class LivroController {
 
     @PostMapping("editar")
     @Transactional
-    public String editar(Livro livro, RedirectAttributes redirectAttributes){
+    public String editar(@Valid Livro livro, BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model){
+        if(bindingResult.hasErrors()){
+            model.addAttribute("generos", Genero.values());
+            return "biblioteca/editar";
+        }
         repository.save(livro);
         redirectAttributes.addFlashAttribute("msg", "Livro Editado!");
         return "redirect:/livros/listar";
