@@ -20,6 +20,7 @@
                 <th>Data Publicação</th>
                 <th>Gênero</th>
                 <th>Disponível</th>
+                <th>Editora</th>
                 <th></th>
             </tr>
              <tr th:each="livro:${livros}">
@@ -31,20 +32,21 @@
                  <td th:text="${#temporals.format(livro.dataPublicacao, 'dd/MM/yyyy')}"></td>
                  <td th:text="${livro.genero.getLabel()}"></td>
                  <td th:text="${livro.disponivel? 'sim' : 'nao'}"></td>
+                 <td th:text="${livro.editora.nome}"></td>
                  <td>
                      <a th:href="@{/livros/editar/}+${livro.id}" class="btn btn-outline-primary">Editar</a>
                  </td>
                  <td>
                      <button th:onclick="|document.getElementById('livroId').value = ${livro.id}|" type="button" class="btn btn-outline-danger"
-                             data-bs-toggle="modal" data-bs-target="#exampleModal">Excluir</button>
+                             data-bs-toggle="modal" data-bs-target="#modalExcluir">Excluir</button>
                  </td>
              </tr>
         </table>
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="modalExcluir" tabindex="-1" role="dialog" aria-labelledby="modalExcluirlLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Confirmação</h5>
+                        <h5 class="modal-title" id="modalExcluirlLabel">Confirmação</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>

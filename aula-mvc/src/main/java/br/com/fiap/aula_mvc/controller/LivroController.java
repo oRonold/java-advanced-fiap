@@ -2,6 +2,7 @@ package br.com.fiap.aula_mvc.controller;
 
 import br.com.fiap.aula_mvc.model.Genero;
 import br.com.fiap.aula_mvc.model.Livro;
+import br.com.fiap.aula_mvc.repository.EditoraRepository;
 import br.com.fiap.aula_mvc.repository.LivroRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,15 +20,19 @@ public class LivroController {
     @Autowired
     private LivroRepository repository;
 
+    @Autowired
+    private EditoraRepository editoraRepository;
+
     @GetMapping("cadastrar")
     public String cadastro(Livro livro, Model model){
         model.addAttribute("generos", Genero.values());
+        model.addAttribute("editoras", editoraRepository.findAll());
         return "biblioteca/formulario";
     }
 
     @PostMapping("cadastrar")
     @Transactional
-    public String cadastrar(@ModelAttribute @Valid Livro livro,
+    public String cadastrar(@Valid Livro livro,
                             BindingResult bindingResult,
                             RedirectAttributes redirectAttributes, Model model){
         if(bindingResult.hasErrors()){
@@ -48,6 +53,7 @@ public class LivroController {
     @GetMapping("/editar/{id}")
     public String exibirEditar(@PathVariable("id") Long codigo, Model model){
         model.addAttribute("livro", repository.findById(codigo));
+        model.addAttribute("editoras", editoraRepository.findAll());
         model.addAttribute("generos", Genero.values());
         return "biblioteca/editar";
     }

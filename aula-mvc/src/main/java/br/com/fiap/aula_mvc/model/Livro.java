@@ -37,8 +37,7 @@ public class Livro {
     @Column(name = "nr_paginas", nullable = false, precision = 4)
     private Integer paginas;
 
-    @NotBlank(message = "ISBN não pode ser nulo")
-    @Max(value = 13, message = "O ISBN precisa conter 13 dígitos")
+    @Size(max = 13, message = "O ISBN precisa conter 13 dígitos")
     @Column(name = "nr_isbn", unique = true, length = 60)
     private String isbn;
 
@@ -53,4 +52,8 @@ public class Livro {
     @Enumerated(EnumType.STRING)
     @Column(name = "ds_genero", nullable = false)
     private Genero genero;
+
+    @ManyToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "cd_editora", nullable = false)
+    private Editora editora;
 }

@@ -10,39 +10,51 @@
 <div class="container" layout:fragment="conteudo">
     <h1>Editar Livro</h1>
     <form th:action="@{/livros/editar}" method="post" th:object="${livro}">
-        <div class="alert alert-danger" th:if="${#fields.hasErrors('*')}">
-            <p th:each="err : ${#fields.errors('*')}" th:text="${err}"></p>
-        </div>
         <input hidden="hidden" th:field="*{id}">
         <div class="mb-3">
             <label class="form-label">Título</label>
             <input type="text" th:field="*{titulo}" class="form-control">
+            <p th:if="${#fields.hasErrors('titulo')}" class="text text-danger" th:errors="*{titulo}"></p>
         </div>
         <div class="mb-3">
             <label class="form-label">Sinopse</label>
             <textarea th:field="*{sinopse}" class="form-control"></textarea>
+            <p th:if="${#fields.hasErrors('sinopse')}" class="text text-danger" th:error="*{sinopse}"></p>
         </div>
         <div class="mb-3">
             <label class="form-label">Preço</label>
             <input type="number" class="form-control" th:field="*{preco}">
+            <p th:if="${#fields.hasErrors('preco')}" class="text text-danger" th:errors="*{preco}"></p>
         </div>
         <div class="mb-3">
             <label class="form-label">ISBN</label>
             <input class="form-control" type="text" th:field="*{isbn}">
+            <p th:if="${#fields.hasErrors('isbn')}" class="text text-danger" th:errors="*{isbn}"></p>
         </div>
         <div class="mb-3">
             <label class="form-label">Número de Páginas</label>
             <input class="form-control" type="number" th:field="*{paginas}">
+            <p th:if="${#fields.hasErrors('paginas')}" class="text text-danger" th:errors="*{paginas}"></p>
         </div>
         <div class="mb-3">
             <label class="form-label">Data Publicação</label>
-            <input type="text" class="form-control" th:field="*{dataPublicacao}">
+            <input type="date" class="form-control" th:field="*{dataPublicacao}">
+            <p th:if="${#fields.hasErrors('dataPublicacao')}" class="text text-danger" th:errors="*{dataPublicacao}"></p>
         </div>
         <div class="mb-3">
             <label class="form-label">Gênero</label>
             <select class="form-control" th:field="*{genero}">
                 <option value="" disabled selected>Selecione um gênero</option>
                 <option th:each="genero : ${generos}" th:value="${genero}" th:text="${genero.label}"></option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Editoras</label>
+            <select th:field="*{editora.id}" id="categoria" class="form-control">
+                <option value="" disabled selected>Selecione</option>
+                <option th:each="c:${editoras}"
+                        th:value="${c.id}"
+                        th:text="${c.nome}"></option>
             </select>
         </div>
         <div class="mb-3">

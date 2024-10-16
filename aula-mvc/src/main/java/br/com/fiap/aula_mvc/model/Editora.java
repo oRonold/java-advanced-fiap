@@ -9,6 +9,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
 
+import java.util.List;
+
 @Entity
 @Getter @Setter @NoArgsConstructor
 public class Editora {
@@ -34,4 +36,7 @@ public class Editora {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "cd_endereco", nullable = false)
     private Endereco endereco;
+
+    @OneToMany(mappedBy = "editora")
+    private List<Livro> livros;
 }
