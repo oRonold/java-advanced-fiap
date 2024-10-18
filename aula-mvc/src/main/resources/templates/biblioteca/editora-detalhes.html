@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Editora</title>
+</head>
+<body>
+
+    <div class="container" layout:fragment="conteudo">
+        <h1 th:text="${editora.nome}">Nome da Editora</h1>
+        <p><span class="label">CNPJ: </span><span th:text="${editora.cnpj}"></span></p>
+        <p><span class="label">Email: </span><span th:text="${editora.email}"></span></p>
+        <div>
+            <h4>Endereço</h4>
+            <p><span class="label">Logradouro: </span><span th:text="${editora.endereco.logradouro}"></span></p>
+            <p><span class="label">CEP: </span><span th:text="${editora.endereco.cep}"></span></p>
+            <p><span class="label">Número: </span><span th:text="${editora.endereco.numero}"></span></p>
+        </div>
+
+        <div class="list-group">
+            <h2>Livros Publicados</h2>
+            <ul>
+                <li th:if="${#lists.isEmpty(editora.livros)}">Nenhum livro publicado por esta Editora</li>
+                <li th:each="livro : ${editora.livros}">
+                    <span th:text="${livro.titulo}"></span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+</body>
+</html>

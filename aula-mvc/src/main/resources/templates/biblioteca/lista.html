@@ -32,7 +32,9 @@
                  <td th:text="${#temporals.format(livro.dataPublicacao, 'dd/MM/yyyy')}"></td>
                  <td th:text="${livro.genero.getLabel()}"></td>
                  <td th:text="${livro.disponivel? 'sim' : 'nao'}"></td>
-                 <td th:text="${livro.editora.nome}"></td>
+                 <td>
+                     <a th:href="@{/editoras/detalhes/}+${livro.editora.id}" th:text="${livro.editora.nome}"></a>
+                 </td>
                  <td>
                      <a th:href="@{/livros/editar/}+${livro.id}" class="btn btn-outline-primary">Editar</a>
                  </td>
