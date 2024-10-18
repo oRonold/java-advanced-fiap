@@ -13,6 +13,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/livros")
 public class LivroController {
@@ -42,6 +44,12 @@ public class LivroController {
         repository.save(livro);
         redirectAttributes.addFlashAttribute("msg", "Livro Cadastrado!");
         return "redirect:/livros/listar";
+    }
+
+    @GetMapping("pesquisar")
+    public String pesquisar(@RequestParam String query, Model model){
+        model.addAttribute("livros", repository.findByTituloContainingIgnoreCase(query));
+        return "biblioteca/lista";
     }
 
     @GetMapping("listar")
