@@ -8,28 +8,37 @@
 </head>
 <body>
 
-    <div class="container" layout:fragment="conteudo">
-        <h1 th:text="${editora.nome}">Nome da Editora</h1>
-        <p><span class="label">CNPJ: </span><span th:text="${editora.cnpj}"></span></p>
-        <p><span class="label">Email: </span><span th:text="${editora.email}"></span></p>
-        <div>
-        <h4>Endereço</h4>
-        <p><span class="label">Logradouro: </span><span th:text="${editora.endereco.logradouro}"></span></p>
-        <p><span class="label">CEP: </span><span th:text="${editora.endereco.cep}"></span></p>
-        <p><span class="label">Número: </span><span th:text="${editora.endereco.numero}"></span></p>
+    <div class="card-group" layout:fragment="conteudo">
+        <div class="card text-bg-dark mb-3">
+            <img th:src="@{/images/calo.png}" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h1 th:text="${editora.nome}" class="card-title">Nome da Editora</h1>
+                <p class="card-text"><span class="label">CNPJ: </span><span th:text="${editora.cnpj}"></span></p>
+                <p class="card-text"><span class="label">Email: </span><span th:text="${editora.email}"></span></p>
+            </div>
         </div>
-
-        <div class="list-group">
-            <h2>Livros Publicados</h2>
-            <ul>
-                <li th:if="${#lists.isEmpty(editora.livros)}">Nenhum livro publicado por esta Editora</li>
-                <li th:each="livro : ${editora.livros}">
-                    <span th:text="${livro.titulo}"></span>
-                </li>
-            </ul>
+        <div class="card text-bg-dark mb-3">
+            <img th:src="@{/images/melo.webp}" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h4 class="card-title">Endereço</h4>
+                <p class="card-text"><span class="label">Logradouro: </span><span th:text="${editora.endereco.logradouro}"></span></p>
+                <p class="card-text"><span class="label">CEP: </span><span th:text="${editora.endereco.cep}"></span></p>
+                <p class="card-text"><span class="label">Número: </span><span th:text="${editora.endereco.numero}"></span></p>
+            </div>
+        </div>
+        <div class="card text-bg-dark mb-3">
+            <img th:src="@{/images/jare.jpeg}" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h2 class="card-title">Livros Publicados</h2>
+                <ul>
+                    <li th:if="${#lists.isEmpty(editora.livros)}">Nenhum livro publicado por esta Editora</li>
+                    <li th:each="livro : ${editora.livros}">
+                        <span th:text="${livro.titulo}"></span>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
-
 
 </body>
 </html>

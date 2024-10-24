@@ -10,7 +10,7 @@
     <div class="container" layout:fragment="conteudo">
         <div class="alert alert-success"
              th:if="${msg !=null}" th:text="${msg}"></div>
-        <table class="table">
+        <table class="table table-striped">
             <tr>
                 <th>Titulo</th>
                 <th>Sinopse</th>
@@ -21,6 +21,7 @@
                 <th>Gênero</th>
                 <th>Disponível</th>
                 <th>Editora</th>
+                <th></th>
                 <th></th>
             </tr>
              <tr th:each="livro:${livros}">
@@ -36,10 +37,10 @@
                      <a th:href="@{/editoras/detalhes/}+${livro.editora.id}" th:text="${livro.editora.nome}"></a>
                  </td>
                  <td>
-                     <a th:href="@{/livros/editar/}+${livro.id}" class="btn btn-outline-primary">Editar</a>
+                     <a th:href="@{/livros/editar/}+${livro.id}" class="btn btn-sm btn-primary">Editar</a>
                  </td>
                  <td>
-                     <button th:onclick="|document.getElementById('livroId').value = ${livro.id}|" type="button" class="btn btn-outline-danger"
+                     <button th:onclick="|document.getElementById('livroId').value = ${livro.id}|" type="button" class="btn btn-sm btn-danger"
                              data-bs-toggle="modal" data-bs-target="#modalExcluir">Excluir</button>
                  </td>
              </tr>
