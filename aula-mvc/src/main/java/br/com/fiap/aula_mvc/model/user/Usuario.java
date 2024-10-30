@@ -3,12 +3,14 @@ package br.com.fiap.aula_mvc.model.user;
 import br.com.fiap.aula_mvc.model.role.Role;
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Set;
 
-@Entity @Table(name = "user")
+@Entity @Table(name = "usuario")
 @Getter @Setter
+@NoArgsConstructor
 public class Usuario {
 
     @Id

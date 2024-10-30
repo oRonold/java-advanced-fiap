@@ -13,6 +13,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -25,7 +26,7 @@ public class UsuarioService implements UserDetailsService {
     @Autowired
     private RoleRepository roleRepository;
 
-    public void saveUser(String username, String password, Set<String> roles) {
+    public void saveUser(String username, String password, List<String> roles) {
         Set<Role> roleSet = new HashSet<>();
         for(String roleName : roles){
             Role role = roleRepository.findByName(roleName);
