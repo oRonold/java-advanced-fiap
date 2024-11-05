@@ -21,7 +21,7 @@ public class SecurityConfigurations {
                         .anyRequest().permitAll()
                 )
                 .formLogin(form -> form
-                        .loginPage("/usuarios/register") // Página de login personalizada
+                        .loginPage("/login") // Página de login personalizada
                         .defaultSuccessUrl("/home") // Página de redirecionamento após sucesso no login
                         .permitAll()
                 )
